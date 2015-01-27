@@ -1,0 +1,91 @@
+;
+; SSDT_getImagePath.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Sample ; TODO: edit Class
+ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=SSDT_getImagePath.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+SSDT_getImagePath.sys  = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%SSDT_getImagePath.DeviceDesc%=SSDT_getImagePath_Device, Root\SSDT_getImagePath ; TODO: edit hw-id
+
+[SSDT_getImagePath_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+SSDT_getImagePath.sys
+
+;-------------- Service installation
+[SSDT_getImagePath_Device.NT.Services]
+AddService = SSDT_getImagePath,%SPSVCINST_ASSOCSERVICE%, SSDT_getImagePath_Service_Inst
+
+; -------------- SSDT_getImagePath driver install sections
+[SSDT_getImagePath_Service_Inst]
+DisplayName    = %SSDT_getImagePath.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\SSDT_getImagePath.sys
+LoadOrderGroup = Extended Base
+
+;
+;--- SSDT_getImagePath_Device Coinstaller installation ------
+;
+
+[DestinationDirs]
+SSDT_getImagePath_Device_CoInstaller_CopyFiles = 11
+
+[SSDT_getImagePath_Device.NT.CoInstallers]
+AddReg=SSDT_getImagePath_Device_CoInstaller_AddReg
+CopyFiles=SSDT_getImagePath_Device_CoInstaller_CopyFiles
+
+[SSDT_getImagePath_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[SSDT_getImagePath_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[SourceDisksFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+[SSDT_getImagePath_Device.NT.Wdf]
+KmdfService =  SSDT_getImagePath, SSDT_getImagePath_wdfsect
+[SSDT_getImagePath_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="" ; TODO: add ManufacturerName
+ClassName="Samples" ; TODO: edit ClassName
+DiskName = "SSDT_getImagePath Installation Disk"
+SSDT_getImagePath.DeviceDesc = "SSDT_getImagePath Device"
+SSDT_getImagePath.SVCDESC = "SSDT_getImagePath Service"

@@ -1,0 +1,29 @@
+﻿已經開始建置於 2014/12/25 上午 08:35:28。
+     1>節點 2 (Build 目標) 上的專案 "C:\Users\irene\Documents\Visual Studio 2013\Projects\SSDT_getImagePath\SSDT_getImagePath Package\SSDT_getImagePath Package.vcxproj"。
+     1>Inf2Cat:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\inf2cat.exe /os:7_x86 /USELOCALTIME /driver:"C:\Users\irene\Documents\Visual Studio 2013\Projects\SSDT_getImagePath\Win7Debug\SSDT_getImagePath Package\\" 
+         ..........................
+         Signability test complete.
+         
+         Errors:
+         None
+         
+         Warnings:
+         None
+         
+         Catalog generation complete.
+         C:\Users\irene\Documents\Visual Studio 2013\Projects\SSDT_getImagePath\Win7Debug\SSDT_getImagePath Package\ssdt_getimagepath.cat
+       DriverTestSign:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\signtool.exe sign /ph /sha1 "7F26CAC14BC3919F8229538596E4E5EED21FDAE4" 
+         Done Adding Additional Store
+         Successfully signed: C:\Users\irene\Documents\Visual Studio 2013\Projects\SSDT_getImagePath\Win7Debug\SSDT_getImagePath Package\ssdt_getimagepath.cat
+         
+       Deploy:
+         Deploying driver files for project "C:\Users\irene\Documents\Visual Studio 2013\Projects\SSDT_getImagePath\SSDT_getImagePath Package\SSDT_getImagePath Package.vcxproj".  Deployment may take a few minutes...
+     1>C:\Program Files (x86)\Windows Kits\8.1\build\Win32\ImportAfter\DriverDeployment.targets(69,9): error : Could not connect to the remote computer for deployment.
+     1>C:\Program Files (x86)\Windows Kits\8.1\build\Win32\ImportAfter\DriverDeployment.targets(69,9): error : 並未將物件參考設定為物件的執行個體。
+     1>專案 "C:\Users\irene\Documents\Visual Studio 2013\Projects\SSDT_getImagePath\SSDT_getImagePath Package\SSDT_getImagePath Package.vcxproj" (Build 目標) 建置完成 -- 失敗。
+
+建置失敗。
+
+經過時間 00:00:42.45
